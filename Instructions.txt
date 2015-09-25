@@ -1,0 +1,11 @@
+Filetree React homework assignment
+
+ - Build a file tree explorer in React/HTML that reads the file tree from a .json.
+ - Should be able to expand/collapse folders to reveal the contents. Bonus points for animating the expand/collapse.
+ - File should be able to be highlighted, and when highlighted, the contents should be displayed in some manner.
+ - Only one file can be highlighted at a time.
+ - Should work with an arbitrarily deep file tree with an arbitrary amount of files.
+ - Example .json file provided, needs to work with other files using the same structure.
+ - Example screenshot from SublimeText provided. Design does not need to be the same, and line numbers or file icons do not need to be displayed.
+ - Use React.js. Other dependencies or libraries optional, but do NOT use jQuery. All the dependencies should either be already included in the final .zip file, or be easily installable on any computer with NPM.
+ - Feel free to get creative, interpret the specs as you see fit and fill the gaps in the specs however you think best.
