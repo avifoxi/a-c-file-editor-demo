@@ -1,1 +1,3 @@
-console.log('yo mofo i here');
+var data = require('./data/files.json');
+
+console.log(data);
