@@ -5,7 +5,7 @@ var data = require('./data/files.json');
 var TreeView = require('./components/FileTreeView.js');
 var React = require('react');
 
-React.render(React.createElement(TreeView, { fileTree: data }), document.getElementById('mount'));
+React.render(React.createElement(TreeView, { fileTree: data.files }), document.getElementById('mount'));
 
 },{"./components/FileTreeView.js":2,"./data/files.json":3,"react":159}],2:[function(require,module,exports){
 'use strict';
@@ -16,14 +16,22 @@ var FileTreeView = React.createClass({
 	displayName: 'FileTreeView',
 
 	render: function render() {
+		var tree = this.props.fileTree.map(function (el) {
+			var text = el.isFolder ? 'Folder' : 'File';
+			console.log(text);
+			return React.createElement(
+				'div',
+				null,
+				'I am a ',
+				text,
+				'!'
+			);
+		});
+		// debugger;
 		return React.createElement(
 			'div',
 			null,
-			React.createElement(
-				'p',
-				null,
-				this.props.fileTree
-			)
+			tree
 		);
 	}
 });
