@@ -20,16 +20,17 @@ var FileTreeView = React.createClass({
 
 	recursiveTree: function recursiveTree(files) {
 		var recurse = this.recursiveTree;
-		debugger;
 		var tree = files.map(function (el) {
 			if (el.isFolder) {
 				return React.createElement(FolderView, {
+					key: el.filename,
 					filename: el.filename,
 					files: el.files,
 					recursiveTree: recurse
 				});
 			} else {
 				return React.createElement(FileView, {
+					key: el.filename,
 					filename: el.filename,
 					filetype: el.filetype,
 					contents: el.contents
@@ -82,12 +83,10 @@ module.exports = FileView;
 'use strict';
 
 var React = require('react');
-// var FileView = require('FileView.js');
 
-// filename
-// filetype
-// contents
-// recursiveTree < function >
+var indentStyle = {
+	marginLeft: '10%'
+};
 
 var FolderView = React.createClass({
 	displayName: 'FolderView',
@@ -102,7 +101,11 @@ var FolderView = React.createClass({
 				null,
 				this.props.filename
 			),
-			tree
+			React.createElement(
+				'div',
+				{ style: indentStyle },
+				tree
+			)
 		);
 	}
 });

@@ -6,11 +6,11 @@ var FolderView = require('./FolderView.js');
 var FileTreeView = React.createClass({
 	recursiveTree: function( files ){
 		var recurse = this.recursiveTree;
-		debugger;
 		var tree = files.map(function(el){
 			if ( el.isFolder ){
 				return (
 					< FolderView 
+						key={ el.filename }
 						filename={ el.filename }
 						files={ el.files }
 						recursiveTree={ recurse }
@@ -18,7 +18,8 @@ var FileTreeView = React.createClass({
 				);
 			} else {
 				return(
-					< FileView 
+					< FileView
+						key={ el.filename } 
 						filename={ el.filename }
 						filetype={ el.filetype }
 						contents={ el.contents } 

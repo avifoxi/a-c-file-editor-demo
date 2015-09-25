@@ -1,10 +1,8 @@
 var React = require('react');
-// var FileView = require('FileView.js');
 
-// filename
-// filetype
-// contents
-// recursiveTree < function >
+var indentStyle = {
+	marginLeft: '10%'
+} 
 
 var FolderView = React.createClass({
 	render: function () {
@@ -12,7 +10,9 @@ var FolderView = React.createClass({
 		return(
 			<div>
 				<h3>{ this.props.filename }</h3>
-				{ tree }
+				<div style={indentStyle}>
+					{ tree }
+				</div>
 			</div>
 		);
 	}
