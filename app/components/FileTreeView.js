@@ -1,21 +1,37 @@
 var React = require('react');
 
-var FileTreeView = React.createClass({
-	render: function() {
-		var tree = this.props.fileTree.map(function(el){
-			let text = el.isFolder ? 'Folder' : 'File';
-			console.log(text);
-			return(
-				<div>
-					I am a { text }!
-				</div>
-			);
-		});
-		// debugger;
-		return (
+var FileView = require('./FileView.js');
+var FolderView = require('./FolderView.js');
 
+var FileTreeView = React.createClass({
+	recursiveTree: function( files ){
+		var recurse = this.recursiveTree;
+		debugger;
+		var tree = files.map(function(el){
+			if ( el.isFolder ){
+				return (
+					< FolderView 
+						filename={ el.filename }
+						files={ el.files }
+						recursiveTree={ recurse }
+					/>
+				);
+			} else {
+				return(
+					< FileView 
+						filename={ el.filename }
+						filetype={ el.filetype }
+						contents={ el.contents } 
+					/>
+				);
+			}
+		});
+		return tree;
+	},
+	render: function() {
+		return (
 			<div>
-				{ tree }
+				{ this.recursiveTree( this.props.fileTree ) }
 			</div>
 		);
 	}
