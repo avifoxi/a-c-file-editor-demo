@@ -39,7 +39,7 @@ var FileContents = React.createClass({
 		if (type === CONTENT_TYPES[1]) {
 			content = 'RENDER A BEAUTIFUL PICTURE';
 		} else {
-			content = this.props.content;
+			content = this.props.contents;
 		}
 		return content;
 	},
@@ -229,13 +229,24 @@ var FolderView = React.createClass({
 	displayName: 'FolderView',
 
 	render: function render() {
-		var tree = this.props.recursiveTree(this.props.files);
+		var plusMinus, tree;
+		if (this.state.expanded) {
+			tree = this.props.recursiveTree(this.props.files);
+			plusMinus = '-';
+		} else {
+			plusMinus = '+';
+		}
 		return React.createElement(
 			'div',
 			null,
 			React.createElement(
 				'h3',
 				null,
+				React.createElement(
+					'span',
+					{ onClick: this.toggleEx },
+					plusMinus
+				),
 				this.props.filename
 			),
 			React.createElement(
@@ -244,6 +255,16 @@ var FolderView = React.createClass({
 				tree
 			)
 		);
+	},
+	getInitialState: function getInitialState() {
+		return {
+			expanded: false
+		};
+	},
+	toggleEx: function toggleEx() {
+		this.setState({
+			expanded: !this.state.expanded
+		});
 	}
 });
 

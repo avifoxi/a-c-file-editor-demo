@@ -22,7 +22,7 @@ var FileContents = React.createClass({
 		if ( type === CONTENT_TYPES[1] ){
 			content = 'RENDER A BEAUTIFUL PICTURE';
 		} else {
-			content = this.props.content;
+			content = this.props.contents;
 		}
 		return content;
 	},
