@@ -39,15 +39,15 @@ var FileContents = React.createClass({
 		if (type === CONTENT_TYPES[1]) {
 			content = 'RENDER A BEAUTIFUL PICTURE';
 		} else {
-			content = this.props.contents;
+			content = this.props.content;
 		}
 		return content;
 	},
 	render: function render() {
-		var content = this.props.selected ? this.parseContent() : '';
+		var content = this.props.filename ? this.parseContent() : '';
 		return React.createElement(
 			'div',
-			null,
+			{ className: 'col-md-8 col-lg-8' },
 			content
 		);
 	}
@@ -68,14 +68,28 @@ var FileEditorApp = React.createClass({
 	displayName: 'FileEditorApp',
 
 	render: function render() {
+		var selName, selType, contents;
+		if (this.state.selected) {
+			selName = this.state.selected.props.filename;
+			selType = this.state.selected.props.filetype;
+			contents = this.state.selected.props.contents;
+		}
 		return React.createElement(
 			'div',
-			null,
-			React.createElement(FileTreeView, {
-				fileTree: this.props.fileTree,
-				selectCallback: this.handleSelect
-			}),
-			React.createElement(FileContent, { selected: this.state.selected })
+			{ className: 'container' },
+			React.createElement(
+				'div',
+				{ className: 'row' },
+				React.createElement(FileTreeView, {
+					fileTree: this.props.fileTree,
+					selectCallback: this.handleSelect
+				}),
+				React.createElement(FileContent, {
+					filename: selName,
+					filetype: selType,
+					contents: contents
+				})
+			)
 		);
 	},
 	getInitialState: function getInitialState() {
@@ -84,7 +98,6 @@ var FileEditorApp = React.createClass({
 		};
 	},
 	handleSelect: function handleSelect(instance) {
-		// console.log( targetProps );
 		if (this.state.selected) {
 			var oldSelected = this.state.selected;
 			oldSelected.setState({
@@ -142,7 +155,7 @@ var FileTreeView = React.createClass({
 
 		return React.createElement(
 			'div',
-			null,
+			{ className: 'col-md-4 col-lg-4' },
 			this.recursiveTree(this.props.fileTree)
 		);
 	}
@@ -195,7 +208,7 @@ var FileView = React.createClass({
 			return;
 		}
 		this.setState({
-			selected: !this.state.selected
+			selected: true
 		});
 		this.props.selectCallback(this);
 	}

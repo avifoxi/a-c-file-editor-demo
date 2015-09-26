@@ -22,14 +22,14 @@ var FileContents = React.createClass({
 		if ( type === CONTENT_TYPES[1] ){
 			content = 'RENDER A BEAUTIFUL PICTURE';
 		} else {
-			content = this.props.contents;
+			content = this.props.content;
 		}
 		return content;
 	},
 	render: function () {
-		let content = this.props.selected ? this.parseContent() : '';
+		let content = this.props.filename ? this.parseContent() : '';
 		return(
-			<div>
+			<div className='col-md-8 col-lg-8'>
 				{ content }
 			</div>
 		);

@@ -39,7 +39,7 @@ var FileTreeView = React.createClass({
 	render: function() {
 
 		return (
-			<div>
+			<div className='col-md-4 col-lg-4'>
 				{ this.recursiveTree( this.props.fileTree ) }
 			</div>
 		);
