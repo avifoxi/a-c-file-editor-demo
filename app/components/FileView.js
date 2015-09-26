@@ -31,9 +31,13 @@ var FileView = React.createClass({
 		};
 	},
 	handleClick: function(){
+		if ( this.state.selected ){
+			return;
+		}
 		this.setState({
 			selected: !this.state.selected
 		});
+		this.props.selectCallback( this );
 	}
 });
 

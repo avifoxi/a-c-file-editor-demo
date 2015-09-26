@@ -8,7 +8,10 @@ var FileEditorApp = React.createClass({
 	render: function () {
 		return(
 			<div>
-				<FileTreeView fileTree={ this.props.fileTree }/>
+				<FileTreeView 
+					fileTree={ this.props.fileTree }
+					selectCallback={ this.handleSelect }
+				/>
 				<FileContent selected={ this.state.selected }/>
 			</div>
 		);
@@ -17,6 +20,18 @@ var FileEditorApp = React.createClass({
 		return {
 			selected: null
 		};
+	},
+	handleSelect: function( instance ){
+		// console.log( targetProps );
+		if ( this.state.selected ){
+			var oldSelected = this.state.selected;
+			oldSelected.setState({
+				selected: false
+			});
+		}
+		this.setState({
+			selected: instance
+		});
 	}
 });
 

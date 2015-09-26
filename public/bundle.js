@@ -71,7 +71,10 @@ var FileEditorApp = React.createClass({
 		return React.createElement(
 			'div',
 			null,
-			React.createElement(FileTreeView, { fileTree: this.props.fileTree }),
+			React.createElement(FileTreeView, {
+				fileTree: this.props.fileTree,
+				selectCallback: this.handleSelect
+			}),
 			React.createElement(FileContent, { selected: this.state.selected })
 		);
 	},
@@ -79,6 +82,18 @@ var FileEditorApp = React.createClass({
 		return {
 			selected: null
 		};
+	},
+	handleSelect: function handleSelect(instance) {
+		// console.log( targetProps );
+		if (this.state.selected) {
+			var oldSelected = this.state.selected;
+			oldSelected.setState({
+				selected: false
+			});
+		}
+		this.setState({
+			selected: instance
+		});
 	}
 });
 
@@ -99,13 +114,15 @@ var FileTreeView = React.createClass({
 
 	recursiveTree: function recursiveTree(files) {
 		var recurse = this.recursiveTree;
+		var cb = this.props.selectCallback;
 		var tree = files.map(function (el) {
 			if (el.isFolder) {
 				return React.createElement(FolderView, {
 					key: el.filename,
 					filename: el.filename,
 					files: el.files,
-					recursiveTree: recurse
+					recursiveTree: recurse,
+					selectCallback: cb
 				});
 			} else {
 				contents.push(el.filetype);
@@ -113,7 +130,8 @@ var FileTreeView = React.createClass({
 					key: el.filename,
 					filename: el.filename,
 					filetype: el.filetype,
-					contents: el.contents
+					contents: el.contents,
+					selectCallback: cb
 				});
 			}
 		});
@@ -173,9 +191,13 @@ var FileView = React.createClass({
 		};
 	},
 	handleClick: function handleClick() {
+		if (this.state.selected) {
+			return;
+		}
 		this.setState({
 			selected: !this.state.selected
 		});
+		this.props.selectCallback(this);
 	}
 });
 

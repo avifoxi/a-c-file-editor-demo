@@ -8,24 +8,27 @@ var contents = [];
 var FileTreeView = React.createClass({
 	recursiveTree: function( files ){
 		var recurse = this.recursiveTree;
+		var cb = this.props.selectCallback;
 		var tree = files.map(function(el){
 			if ( el.isFolder ){
 				return (
-					< FolderView 
+					<FolderView 
 						key={ el.filename }
 						filename={ el.filename }
 						files={ el.files }
 						recursiveTree={ recurse }
+						selectCallback={ cb }
 					/>
 				);
 			} else {
 				contents.push( el.filetype );
 				return(
-					< FileView
+					<FileView
 						key={ el.filename } 
 						filename={ el.filename }
 						filetype={ el.filetype }
-						contents={ el.contents } 
+						contents={ el.contents }
+						selectCallback={ cb } 
 					/>
 				);
 			}
