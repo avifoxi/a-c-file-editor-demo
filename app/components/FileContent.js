@@ -27,10 +27,13 @@ var FileContents = React.createClass({
 		return content;
 	},
 	render: function () {
+		let content = this.props.selected ? this.parseContent() : '';
 		return(
 			<div>
-				{ this.parseContent() }
+				{ content }
 			</div>
 		);
 	}
-})
+});
+
+module.exports = FileContents;

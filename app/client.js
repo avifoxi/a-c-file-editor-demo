@@ -1,7 +1,8 @@
 var data = require('./data/files.json');
-var TreeView = require('./components/FileTreeView.js');
+var App = require('./components/FileEditorApp.js');
 var React = require('react');
-// debugging help
+
+// for debugging help
 window._ = require('lodash');
 
-React.render(< TreeView fileTree={data.files} />, document.getElementById('mount'));
+React.render(< App fileTree={data.files} />, document.getElementById('mount'));
