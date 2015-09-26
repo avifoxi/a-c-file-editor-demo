@@ -137,26 +137,45 @@ module.exports = FileTreeView;
 
 var React = require('react');
 
+var selectedStyle = {
+	backgroundColor: 'purple',
+	color: 'white'
+};
+
 var FileView = React.createClass({
 	displayName: 'FileView',
 
 	render: function render() {
+		//<p>
+		// 	{ this.props.contents }
+		// </p>
+		var style;
+		if (this.state.selected) style = selectedStyle;
+
 		return React.createElement(
 			'div',
 			null,
 			React.createElement(
 				'h3',
-				null,
+				{
+					onClick: this.handleClick,
+					style: style
+				},
 				this.props.filename,
 				'.',
 				this.props.filetype
-			),
-			React.createElement(
-				'p',
-				null,
-				this.props.contents
 			)
 		);
+	},
+	getInitialState: function getInitialState() {
+		return {
+			selected: false
+		};
+	},
+	handleClick: function handleClick() {
+		this.setState({
+			selected: !this.state.selected
+		});
 	}
 });
 
