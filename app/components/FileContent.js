@@ -15,9 +15,22 @@ const extToType = {
 };
 
 var FileContents = React.createClass({
+	parseContent: function(){
+		let type = extToType[ this.props.filetype ],
+			content;
+
+		if ( type === CONTENT_TYPES[1] ){
+			content = 'RENDER A BEAUTIFUL PICTURE';
+		} else {
+			content = this.props.contents;
+		}
+		return content;
+	},
 	render: function () {
 		return(
-
+			<div>
+				{ this.parseContent() }
+			</div>
 		);
 	}
 })
