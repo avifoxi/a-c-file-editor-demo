@@ -243,7 +243,7 @@ var FolderView = React.createClass({
 				'h3',
 				null,
 				React.createElement(
-					'span',
+					'a',
 					{ onClick: this.toggleEx },
 					plusMinus
 				),

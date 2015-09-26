@@ -16,9 +16,9 @@ var FolderView = React.createClass({
 		return(
 			<div>
 				<h3>
-					<span onClick={ this.toggleEx } >
+					<a onClick={ this.toggleEx } >
 						{ plusMinus }
-					</span>
+					</a>
 					{ this.props.filename }
 				</h3>
 				<div style={indentStyle}>
