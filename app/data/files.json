@@ -67,7 +67,7 @@
                 {
                     "filename": "package",
                     "isFolder": false,
-                    "filetyle": "json",
+                    "filetype": "json",
                     "contents": "nothing here"
                 },
                 {
